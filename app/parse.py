@@ -15,7 +15,7 @@ class Quote:
     tags: List[str]
 
 
-def parse_quote(quote_soup) -> Quote:
+def parse_quote(quote_soup: BeautifulSoup) -> Quote:
     text = quote_soup.select_one(".text").get_text(strip=True)
     author = quote_soup.select_one(".author").get_text(strip=True)
     tags = [tag.get_text(strip=True) for tag in quote_soup.select(".tag")]
@@ -51,7 +51,6 @@ def save_quotes_to_csv(quotes: List[Quote], output_csv_path: str) -> None:
         writer.writerow(["Text", "Author", "Tags"])
         for quote in quotes:
             writer.writerow([quote.text, quote.author, ", ".join(quote.tags)])
-
 
 
 def main(output_quotes_csv: str) -> None:
